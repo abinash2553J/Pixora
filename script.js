@@ -1,8 +1,3 @@
-/**
- * PIXORA — Minimal Web Snapshot Studio
- * Supports Solid Colors, Preset Gradients, Dual-Color Customizer & Custom CSS
- */
-
 // Core DOM Elements per User Specification
 const section1 = document.getElementById('section1');
 const section2 = document.getElementById('section2');
@@ -74,7 +69,7 @@ function showToast(message) {
 
 function applyBackdrop(bgValue) {
     if (!bgValue) return;
-    
+
     // Apply to live indicator and result preview frame
     if (liveBgIndicator) liveBgIndicator.style.background = bgValue;
     if (screenshotPreviewFrame) screenshotPreviewFrame.style.background = bgValue;
@@ -403,7 +398,7 @@ downloadBtn.addEventListener('click', async () => {
         let domain = 'screenshot';
         try {
             domain = new URL(currentTargetUrl).hostname.replace(/[^a-zA-Z0-9]/g, '-');
-        } catch (_) {}
+        } catch (_) { }
 
         const filename = `${domain}-${Date.now()}.png`;
 
