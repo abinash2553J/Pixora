@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pixora — Minimal, high-resolution website screenshot generator with custom solid & gradient backdrops.">
+    <title>Pixora — Minimal Web Screenshots</title>
+    
+    <!-- Clean, refined typography: Plus Jakarta Sans + Space Grotesk -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Minimal Header -->
+        <header class="navbar">
+            <a href="#" class="brand" id="brandLogo">
+                <span class="brand-mark"></span>
+                <span class="brand-title">pixora</span>
+            </a>
+            <div class="nav-meta">
+                <span class="meta-dot"></span>
+                <span>ready</span>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="content-container">
+            
+            <!-- SECTION 1: HOMEPAGE / INPUT -->
+            <section id="section1" class="view-section active">
+                <div class="minimal-hero">
+                    <span class="subtle-pill">Web Snapshot Studio</span>
+                    <h1 class="hero-title">Capture any website cleanly.</h1>
+                    <p class="hero-sub">Enter a URL to generate a high-resolution screenshot with customizable solid colors or gradient frames.</p>
+                </div>
+
+                <div class="minimal-card">
+                    <form id="screenshotForm" class="minimal-form">
+                        <!-- URL Input -->
+                        <div class="input-block">
+                            <label for="websiteAdress" class="input-label">Website URL</label>
+                            <div class="text-input-wrapper">
+                                <input 
+                                    type="text" 
+                                    id="websiteAdress" 
+                                    name="websiteAdress"
+                                    placeholder="example.com or https://..." 
+                                    required 
+                                    spellcheck="false"
+                                    autocomplete="off"
+                                >
+                            </div>
+                        </div>
+
+                        <!-- Quick suggestions -->
+                        <div class="suggestions-row">
+                            <span class="sugg-label">Try:</span>
+                            <div class="sugg-chips">
+                                <button type="button" class="chip-btn" data-url="apple.com">apple.com</button>
+                                <button type="button" class="chip-btn" data-url="github.com">github.com</button>
+                                <button type="button" class="chip-btn" data-url="stripe.com">stripe.com</button>
+                                <button type="button" class="chip-btn" data-url="linear.app">linear.app</button>
+                            </div>
+                        </div>
+
+                        <!-- Custom Backdrop / Gradient Section -->
+                        <div class="input-block">
+                            <div class="label-row">
+                                <label for="bgColor" class="input-label">Frame Background & Gradients</label>
+                                <div class="backdrop-tabs">
+                                    <button type="button" class="tab-btn active" data-tab="solid">Solid</button>
+                                    <button type="button" class="tab-btn" data-tab="gradient">Gradients</button>
+                                    <button type="button" class="tab-btn" data-tab="custom">Custom</button>
+                                </div>
+                            </div>
+
+                            <!-- Primary BG input (Required ID: bgColor) -->
+                            <div class="bg-input-container">
+                                <input 
+                                    type="text" 
+                                    id="bgColor" 
+                                    name="bgColor" 
+                                    value="#121212"
+                                    placeholder="#hex, rgb(), or linear-gradient(...)"
+                                    spellcheck="false"
+                                    autocomplete="off"
+                                >
+                                <div class="live-bg-preview" id="liveBgIndicator" style="background: #121212;"></div>
+                            </div>
+
+                            <!-- Tab 1: Solid Color Controls -->
+                            <div class="tab-panel active" id="tabSolid">
+                                <div class="color-row">
+                                    <div class="color-picker-btn">
+                                        <input type="color" id="nativeColorPicker" value="#121212" title="Pick any color">
+                                        <span class="picker-label">Color Picker</span>
+                                    </div>
+                                    <div class="preset-dots">
+                                        <button type="button" class="dot-btn active" data-bg="#121212" style="background: #121212;" title="Obsidian"></button>
+                                        <button type="button" class="dot-btn" data-bg="#1e2022" style="background: #1e2022;" title="Charcoal"></button>
+                                        <button type="button" class="dot-btn" data-bg="#1e1b2e" style="background: #1e1b2e;" title="Plum"></button>
+                                        <button type="button" class="dot-btn" data-bg="#0f2620" style="background: #0f2620;" title="Deep Forest"></button>
+                                        <button type="button" class="dot-btn" data-bg="#291a10" style="background: #291a10;" title="Warm Sienna"></button>
+                                        <button type="button" class="dot-btn" data-bg="#f5f5f7" style="background: #f5f5f7;" title="Studio White"></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tab 2: Gradients Grid & Dual-Color Customizer -->
+                            <div class="tab-panel" id="tabGradient">
+                                <div class="gradient-grid">
+                                    <button type="button" class="gradient-card" data-bg="linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);">
+                                        <span>Midnight</span>
+                                    </button>
+                                    <button type="button" class="gradient-card" data-bg="linear-gradient(135deg, #31103f 0%, #6b21a8 50%, #1e1b4b 100%)" style="background: linear-gradient(135deg, #31103f 0%, #6b21a8 50%, #1e1b4b 100%);">
+                                        <span>Cosmic</span>
+                                    </button>
+                                    <button type="button" class="gradient-card" data-bg="linear-gradient(135deg, #064e3b 0%, #047857 50%, #022c22 100%)" style="background: linear-gradient(135deg, #064e3b 0%, #047857 50%, #022c22 100%);">
+                                        <span>Emerald</span>
+                                    </button>
+                                    <button type="button" class="gradient-card" data-bg="linear-gradient(135deg, #431407 0%, #b45309 50%, #78350f 100%)" style="background: linear-gradient(135deg, #431407 0%, #b45309 50%, #78350f 100%);">
+                                        <span>Amber Dawn</span>
+                                    </button>
+                                    <button type="button" class="gradient-card" data-bg="linear-gradient(135deg, #18181b 0%, #27272a 50%, #09090b 100%)" style="background: linear-gradient(135deg, #18181b 0%, #27272a 50%, #09090b 100%);">
+                                        <span>Graphite</span>
+                                    </button>
+                                    <button type="button" class="gradient-card" data-bg="linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 50%, #94a3b8 100%)" style="background: linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 50%, #94a3b8 100%);">
+                                        <span style="color: #0f172a;">Silver Mist</span>
+                                    </button>
+                                </div>
+
+                                <!-- Dynamic 2-Color Gradient Builder -->
+                                <div class="gradient-builder">
+                                    <span class="builder-label">Build Custom Gradient:</span>
+                                    <div class="builder-inputs">
+                                        <div class="color-mini-slot">
+                                            <label>Start</label>
+                                            <input type="color" id="gradColor1" value="#1e1b4b">
+                                        </div>
+                                        <div class="color-mini-slot">
+                                            <label>End</label>
+                                            <input type="color" id="gradColor2" value="#0f766e">
+                                        </div>
+                                        <select id="gradAngle" class="angle-select">
+                                            <option value="135deg">135° (Diagonal)</option>
+                                            <option value="90deg">90° (Vertical)</option>
+                                            <option value="180deg">180° (Horizontal)</option>
+                                            <option value="45deg">45° (Soft slant)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tab 3: Freeform Custom CSS -->
+                            <div class="tab-panel" id="tabCustom">
+                                <p class="tab-helper-text">
+                                    Type any CSS background value into the input above — e.g. <code>radial-gradient(circle, #2e0854, #000)</code> or <code>#0f172a</code>.
+                                </p>
+                            </div>
+                        </div>
+
+                        <button type="submit" id="captureBtn" class="btn-clean btn-submit">
+                            <span>Capture Screenshot</span>
+                            <span class="arrow-icon">→</span>
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- SECTION 2: MINIMAL LOADER -->
+            <section id="section2" class="view-section">
+                <div class="loader-container">
+                    <div class="minimal-spinner"></div>
+                    <h2 class="loader-heading">Capturing website</h2>
+                    <p class="loader-url" id="targetUrlNotice">https://...</p>
+
+                    <div class="loader-progress-rail">
+                        <div class="loader-progress-bar" id="progressBar"></div>
+                    </div>
+
+                    <div class="loader-status-text" id="loaderStatusText">Connecting to server...</div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: RESULT & DOWNLOAD -->
+            <section id="section3" class="view-section">
+                <div class="result-header-clean">
+                    <span class="subtle-pill success">Ready</span>
+                    <h2 class="result-domain" id="resultUrlLabel">example.com</h2>
+                </div>
+
+                <!-- Preview Frame with customizable background -->
+                <div class="minimal-preview-frame" id="screenshotPreviewFrame">
+                    <div class="window-shell">
+                        <div class="shell-bar">
+                            <div class="shell-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                            <div class="shell-url" id="mockUrlText">https://...</div>
+                        </div>
+                        <div class="shell-canvas">
+                            <div class="canvas-loader" id="imgPlaceholder">
+                                <div class="mini-spinner"></div>
+                                <span>Rendering image...</span>
+                            </div>
+                            <img id="resultImg" alt="Website Screenshot" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Controls -->
+                <div class="action-buttons">
+                    <button id="Download" class="btn-clean btn-submit">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        <span>Download Image</span>
+                    </button>
+                    <button type="button" id="captureAnotherBtn" class="btn-clean btn-ghost">
+                        <span>New capture</span>
+                    </button>
+                    <button type="button" id="copyLinkBtn" class="btn-clean btn-ghost">
+                        <span>Copy link</span>
+                    </button>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Minimal Footer -->
+        <footer class="footer">
+            <span>Pixora</span>
+            <span>·</span>
+            <span>Minimalist screenshot studio</span>
+        </footer>
+    </div>
+
+    <!-- Minimal Toast -->
+    <div id="toast" class="toast-clean">
+        <span id="toastMessage">Done</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
